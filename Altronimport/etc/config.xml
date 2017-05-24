@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Innscience_Altronimport>
+            <version>0.1.0.0</version>
+        </Innscience_Altronimport>
+    </modules>
+    <global>
+        <models>
+            <altronimport>
+                <class>Innscience_Altronimport_Model</class>
+            </altronimport>
+        </models>
+        <blocks>
+            <altronimport>
+                <class>Innscience_Altronimport_Block</class>
+            </altronimport>
+        </blocks>
+        <helpers>
+            <altronimport>
+                <class>Innscience_Altronimport_Helper</class>
+            </altronimport>
+        </helpers>
+    </global>
+
+    <frontend>
+        <routers>
+            <altronimport>
+                <use>standard</use>
+                <args>
+                    <module>Innscience_Altronimport</module>
+                    <frontName>alltron</frontName>
+                </args>
+            </altronimport>
+        </routers>
+    </frontend>
+
+    <crontab>
+        <jobs>
+			<altronimport_downloadproduct>
+                <schedule>	
+                    <cron_expr>15 22 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>altronimport/product::downloadProductFile</model>
+                </run>
+            </altronimport_downloadproduct>
+		
+            <altronimport_product>
+                <schedule>
+                    <cron_expr>50 23 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>altronimport/product::newProductImport</model>
+                </run>
+            </altronimport_product>
+        </jobs>
+    </crontab>
+</config>
